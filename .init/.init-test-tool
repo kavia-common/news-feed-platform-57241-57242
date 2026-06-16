@@ -1,0 +1,4 @@
+{
+    "command": "npm run test",
+    "working_directory": "/home/kavia/workspace/code-generation/news-feed-platform-57241-57242/boca_juniors_news_frontend"
+}
