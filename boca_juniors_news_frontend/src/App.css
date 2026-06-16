@@ -1,104 +1,271 @@
 /* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
+  /* Light theme colors (sports-news oriented) */
+  --bg-primary: #f9fafb; /* light gray background */
+  --bg-secondary: #ffffff; /* surface */
+  --text-primary: #111827; /* gray-900 */
+  --text-muted: rgba(17, 24, 39, 0.7);
+  --border-color: #e5e7eb; /* gray-200 */
+  --shadow-color: rgba(0, 0, 0, 0.06);
+
+  /* Accents from style guide */
+  --accent-primary: #3b82f6; /* blue */
+  --accent-success: #10b981; /* green */
+  --accent-warm: #f59e0b; /* amber */
+
+  --button-bg: var(--accent-primary);
   --button-text: #ffffff;
+
+  /* Boca-inspired brand colors (subtle usage) */
+  --boca-blue: #0b2a62;
+  --boca-gold: #f2b705;
 }
 
 [data-theme="dark"] {
   /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
+  --bg-primary: #0b1220;
+  --bg-secondary: #111827;
   --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.72);
+  --border-color: rgba(255, 255, 255, 0.12);
+  --shadow-color: rgba(0, 0, 0, 0.35);
+
+  --accent-primary: #60a5fa;
+  --accent-success: #34d399;
+  --accent-warm: #fbbf24;
+
+  --button-bg: var(--accent-primary);
+  --button-text: #0b1220;
+
+  --boca-blue: #0b2a62;
+  --boca-gold: #f2b705;
 }
 
 .App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
   min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Generic container utility */
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* ===== Header (logo + navigation) ===== */
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: linear-gradient(
+    180deg,
+    rgba(59, 130, 246, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: saturate(140%) blur(6px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.app-header__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.app-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  padding: 6px 6px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text-primary);
+}
+
+.app-header__brand:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.35);
+  outline-offset: 2px;
+}
+
+.app-header__logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #0b1220;
+  background: linear-gradient(135deg, var(--boca-gold), var(--accent-warm));
+  box-shadow: 0 8px 18px var(--shadow-color);
+}
+
+.app-header__brandText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.app-header__title {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.app-header__subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.app-header__navList {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+.app-header__navLink {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.app-header__navLink:hover {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.18);
+  transform: translateY(-1px);
+}
+
+.app-header__navLink.is-active {
+  background: rgba(59, 130, 246, 0.14);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Mobile: make nav horizontally scrollable */
+@media (max-width: 768px) {
+  .app-header__inner {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .app-header__nav {
+    width: 100%;
+  }
+
+  .app-header__navList {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    justify-content: flex-start;
+  }
+
+  .app-header__navLink {
+    white-space: nowrap;
   }
 }
 
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+/* ===== Main layout ===== */
+
+.app-main {
+  padding: 22px 0 44px;
+}
+
+.page-header {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 18px 0 18px;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.page-title {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: -0.4px;
 }
 
+.page-subtitle {
+  margin: 8px 0 0;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.placeholder-surface {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 10px 22px var(--shadow-color);
+}
+
+.placeholder-surface__title {
+  margin: 0 0 6px;
+  font-weight: 800;
+}
+
+.placeholder-surface__text {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Theme toggle button (reused, but positioned within page header now) */
 .theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   background-color: var(--button-bg);
   color: var(--button-text);
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 800;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.15s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 22px var(--shadow-color);
 }
 
 .theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+  transform: translateY(-1px);
+  opacity: 0.95;
 }
 
 .theme-toggle:active {
   transform: translateY(0);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Responsive design for mobile */
 @media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+    width: 100%;
   }
 }
